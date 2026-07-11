@@ -1,6 +1,6 @@
-# Inciterz Website - React + Vite (exact preview)
+# Inciterz Website — React + Vite (exact preview)
 
-This is your **exact `inciterz-preview.html`**, wrapped in a real React + Vite project so it builds and deploys on Netlify. It renders **byte-for-byte identical** to the preview - same layout, fonts, colours, rotating dots, hover effects, auto-scrolling sliders, and the detail-page routing (Directors / Our Work / Media / Impact).
+This is your **exact `inciterz-preview.html`**, wrapped in a real React + Vite project so it builds and deploys on Netlify. It renders **byte-for-byte identical** to the preview — same layout, fonts, colours, rotating dots, hover effects, auto-scrolling sliders, and the detail-page routing (Directors / Our Work / Media / Impact).
 
 ## How it's structured
 
@@ -21,7 +21,7 @@ inciterz-exact/
 
 `App.jsx` renders `body.html` and then executes `preview-script.js` once on mount, so every animation and interaction behaves exactly as in the HTML file.
 
-> Routing note: the preview uses **hash routing** (`/#/directors`, `/#/works`, `/#/impacts/0`, …). That means routes work on Netlify with zero server config - refreshing or sharing a deep link always works. The `_redirects` file is just an extra safety net.
+> Routing note: the preview uses **hash routing** (`/#/directors`, `/#/works`, `/#/impacts/0`, …). That means routes work on Netlify with zero server config — refreshing or sharing a deep link always works. The `_redirects` file is just an extra safety net.
 
 ## Run locally
 
@@ -39,19 +39,19 @@ npm run preview  # serves the production build locally
 
 ## Deploy to Netlify
 
-**Option A - drag & drop (fastest):**
+**Option A — drag & drop (fastest):**
 1. `npm install && npm run build`
 2. Go to https://app.netlify.com/drop and drag the **`dist`** folder in.
    (A pre-built `dist/` is already in this zip, so you can drag it straight away.)
 
-**Option B - Git:**
+**Option B — Git:**
 1. Push this folder to GitHub.
 2. Netlify → *Add new site → Import an existing project* → pick the repo.
 3. Netlify reads `netlify.toml` automatically (build `npm run build`, publish `dist`). Deploy.
 
 ## How to edit content
 
-All real content lives in **`src/body.html`** as plain HTML - open it and edit directly.
+All real content lives in **`src/body.html`** as plain HTML — open it and edit directly.
 
 - **Hero image/video**: search for `data:image/jpeg;base64,` in `body.html` and replace that `<img>`/element with your own `<img src="...">` or a `<video>`.
 - **Text**: every editable spot is a bracketed placeholder like `[ Founder Name ]`, `[ State ]`, `[ Your press headline … ]`, `[ Leader photo ]`. Find & replace with your real content.

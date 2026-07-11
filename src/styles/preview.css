@@ -33,10 +33,15 @@ img{max-width:100%;display:block}
 header{position:fixed;top:0;left:0;right:0;z-index:60;background:#fff;border-bottom:1px solid #ececf1;transition:box-shadow .3s;padding:0}
 header.scrolled{box-shadow:0 6px 24px -18px rgba(8,40,70,.35)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:92px}
-/* logo image */
-.logo{display:flex;align-items:center;line-height:1;text-decoration:none}
-.logo-img{height:100px;width:auto;display:block;object-fit:contain}
-.logo-img--footer{height:110px}
+/* logo: dot-mark on top, wordmark + CONSULTING stacked beneath */
+.logo{display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1}
+.logo .mark{position:relative;width:44px;height:30px;flex:0 0 auto;margin-bottom:3px}
+.logo .mark i{position:absolute;border-radius:50%;display:block}
+.logo .mark .c-cyan{width:19px;height:19px;background:var(--nav-cyan);left:2px;bottom:0}
+.logo .mark .c-dark{width:23px;height:23px;background:#0b0b0f;right:0;top:0}
+.logo .mark .c-dot{width:7px;height:7px;background:#cfe9fa;right:11px;top:4px;z-index:2}
+.logo .wm{font-family:"Montserrat",sans-serif;font-weight:800;font-size:1.32rem;color:#0b0b0f;letter-spacing:.01em;line-height:.95}
+.logo .wm small{display:block;font-family:"Montserrat",sans-serif;font-size:.52rem;letter-spacing:.42em;color:#0b0b0f;font-weight:600;margin-top:3px;padding-left:2px}
 .nav-links{display:flex;align-items:center;gap:33px}
 .nav-links a{font-family:"Montserrat",sans-serif;font-size:.92rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--nav-navy);position:relative;padding:6px 0;transition:color .2s}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-1px;height:2.5px;width:0;background:var(--nav-cyan);border-radius:2px;transition:width .25s}
@@ -50,7 +55,7 @@ header.scrolled{box-shadow:0 6px 24px -18px rgba(8,40,70,.35)}
 .mobile-menu.open{transform:translateY(0);opacity:1}
 .mobile-menu a{font-family:"Montserrat",sans-serif;font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--nav-navy);padding:12px}
 
-/* ===== HERO (full-bleed image only - no text/buttons; swap for video later) ===== */
+/* ===== HERO (full-bleed image only — no text/buttons; swap for video later) ===== */
 .hero{position:relative;width:100%;height:clamp(440px,80vh,720px);margin-top:92px;overflow:hidden;background:#0b1016}
 .hero img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 
@@ -79,6 +84,7 @@ section[id]{scroll-margin-top:96px}
 .photos .dots-tl{position:absolute;top:-24px;left:-26px;width:150px;height:150px;background-image:radial-gradient(#c7d2dd 2px,transparent 2px);background-size:15px 15px;z-index:0}
 .pgrid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
 .pgrid .pi{border-radius:14px;overflow:hidden;box-shadow:0 16px 34px -16px rgba(20,50,80,.30);background:linear-gradient(135deg,#cfe3f2,#a9cbe6);position:relative}
+.pgrid .pi img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
 .pgrid .pi::after{content:attr(data-l);position:absolute;inset:0;display:grid;place-items:center;color:#5f88a8;font-size:.78rem;font-weight:600}
 .pgrid .a{grid-column:1/8;height:212px}
 .pgrid .b{grid-column:8/13;height:212px}
@@ -234,6 +240,9 @@ footer .topbar{height:34px;background:#16203a}
 .fmain{padding:54px 0 8px}
 .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.5fr;gap:40px}
 footer .logo{margin-bottom:22px}
+footer .logo .wm,footer .logo .wm small{color:#0b0b0f}
+footer .logo .mark .c-dark{background:#0b0b0f}
+footer .logo .mark .c-dot{background:#cfe9fa}
 .socials{display:flex;gap:14px}
 .socials a{width:44px;height:44px;border-radius:50%;background:#d3d7dd;display:grid;place-items:center;color:#1a2230;transition:.25s;font-size:.92rem;font-weight:700}
 .socials a:hover{background:#0EA5E9;color:#fff;transform:translateY(-3px)}
@@ -338,4 +347,46 @@ footer .logo{margin-bottom:22px}
   .fgrid{grid-template-columns:1fr}
   .about-txt .welcome{font-size:2.3rem}
   .fbottom{justify-content:center;text-align:center}
+}
+/* ===================== POST-EDIT OVERRIDES / NEW ===================== */
+/* logo as image (nav + footer) */
+.logo{flex-direction:row;align-items:center;gap:0}
+.logo img{height:44px;width:auto;display:block}
+footer .logo{margin-bottom:20px}
+footer .logo img{height:50px}
+
+/* Our Work: slow auto slider of leader cards (non-clickable) */
+.wk-slider{position:relative;z-index:1;overflow:hidden}
+.wk-track{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;padding:6px 2px 14px}
+.wk-track::-webkit-scrollbar{display:none}
+.wk-card{flex:0 0 250px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 18px 40px -20px rgba(20,50,80,.28);display:flex;flex-direction:column;cursor:default;transition:box-shadow .3s ease,transform .3s ease}
+.wk-card:hover{background:#fff;transform:translateY(-4px);box-shadow:0 26px 50px -20px rgba(20,50,80,.42)}
+.wk-photo{border-radius:14px;overflow:hidden;height:262px;background:#dceaf6}
+.wk-photo::after{content:none}
+.wk-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.wk-name{text-align:center;font-family:"Montserrat",sans-serif;font-weight:700;color:#1c6cab;font-size:1.1rem;margin-top:15px}
+
+/* Our Impact: state image cards (non-clickable, shorter) */
+.state-card{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 22px 48px -22px rgba(20,30,45,.5);cursor:default;height:470px;transition:transform .3s ease,box-shadow .3s ease}
+.state-card:hover{transform:translateY(-5px);box-shadow:0 30px 58px -22px rgba(20,30,45,.6)}
+.state-card img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.sc-label{position:absolute;left:0;right:0;bottom:0;padding:32px 18px 16px;background:linear-gradient(transparent,rgba(8,20,40,.86));color:#fff;font-family:"Montserrat",sans-serif;font-weight:700;font-size:1.28rem}
+
+/* colourful social icons */
+.socials a.s-fb{background:#1877F2;color:#fff}
+.socials a.s-yt{background:#FF0000;color:#fff}
+.socials a.s-ig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%);color:#fff}
+.socials a.s-x{background:#000;color:#fff}
+.socials a:hover{transform:translateY(-3px);filter:brightness(1.08)}
+
+@media(max-width:1000px){
+  .wk-card{flex:0 0 220px}
+  .wk-photo{height:230px}
+  .state-card{height:430px}
+}
+@media(max-width:640px){
+  .wk-card{flex:0 0 78%}
+  .state-card{height:400px}
+  .logo img{height:38px}
+  footer .logo img{height:44px}
 }

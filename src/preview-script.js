@@ -6,7 +6,7 @@ const navA=[...document.querySelectorAll('.nav-links a')];
 const secIds=navA.map(a=>a.getAttribute('href'));
 addEventListener('scroll',()=>{
   let cur=secIds[0];
-  for(const id of secIds){const s=document.querySelector(id);if(s&&s.getBoundingClientRect().top<=140)cur=id;}
+  for(const id of secIds){const s=id&&id.startsWith('#')&&id.length>1?document.querySelector(id):null;if(s&&s.getBoundingClientRect().top<=140)cur=id;}
   navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===cur));
 });
 // mobile menu
@@ -19,7 +19,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 // Our Work: very slow continuous auto-slider (non-clickable leader cards)
 const wkt=document.getElementById('wkTrack');
 if(wkt) autoScroll(wkt,0.14);
-// seamless continuous auto-scroll helper (duplicates content, pauses on hover)
 function autoScroll(el,speed){
   el.innerHTML+=el.innerHTML;
   let paused=false,raf;
@@ -42,28 +41,3 @@ if(sb) sb.addEventListener('click',()=>{
   window.location.href='mailto:connect@inciterz.com?subject='+subject+'&body='+body;
   const ok=document.getElementById('okMsg'); if(ok) ok.style.display='block';
 });
-// ===== hash router (directors/works subpages retained but cards are non-clickable) =====
-const PAGES={'#/directors':'page-directors','#/works':'page-works'};
-const ALLPAGES=['page-directors','page-works','page-impact'];
-function selectImpact(idx){
-  const tabs=document.querySelectorAll('#impTabs .wt');
-  tabs.forEach((t,i)=>t.classList.toggle('active',i===idx));
-  const title=document.getElementById('impTitle');
-  if(tabs[idx]&&title) title.textContent=tabs[idx].textContent+' - Our Impact';
-}
-function route(){
-  const h=location.hash, home=document.getElementById('home-page');
-  ALLPAGES.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
-  const mi=h.match(/^#\/impacts\/(\d+)/);
-  if(PAGES[h]&&document.getElementById(PAGES[h])){
-    home.style.display='none';document.getElementById(PAGES[h]).classList.add('active');window.scrollTo(0,0);
-  }else if(mi&&document.getElementById('page-impact')){
-    home.style.display='none';document.getElementById('page-impact').classList.add('active');selectImpact(+mi[1]);window.scrollTo(0,0);
-  }else{
-    home.style.display='';
-    if(h&&h.length>1&&!h.startsWith('#/')){const t=document.querySelector(h);if(t)requestAnimationFrame(()=>t.scrollIntoView({behavior:'smooth'}));}
-    else window.scrollTo({top:0,behavior:'smooth'});
-  }
-}
-window.addEventListener('hashchange',route);
-route();

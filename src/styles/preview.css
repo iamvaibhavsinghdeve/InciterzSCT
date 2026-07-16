@@ -105,8 +105,7 @@ section[id]{scroll-margin-top:96px}
 
 /* ===== IMPACT (ShowTime match: eye heading, 3 bullets, 3 tall infographic cards) ===== */
 .impact{padding:80px 0 90px;background:#e8e8eb}
-.impact-head{display:flex;align-items:center;gap:18px;margin-bottom:28px}
-.impact-head svg{width:58px;height:58px;stroke:#101a2b;fill:none;stroke-width:1.4;flex:0 0 auto}
+.impact-head{display:flex;align-items:center;margin-bottom:28px}
 .impact-head h2{font-family:"Montserrat",sans-serif;font-size:clamp(2.2rem,4.6vw,3.3rem);color:#1c6cab;font-weight:800}
 .impact-bullets{list-style:none;margin:0 0 48px;padding:0;display:flex;flex-direction:column;gap:20px;max-width:1180px}
 .impact-bullets li{position:relative;padding-left:26px;color:#3f4854;font-size:1.05rem;line-height:1.5}
@@ -135,10 +134,8 @@ section[id]{scroll-margin-top:96px}
 .founder-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
 .founder-txt{position:relative}
 .founder-txt .dots-tl{position:absolute;top:-22px;left:-30px;width:160px;height:160px;background-image:radial-gradient(#c7d2dd 2px,transparent 2px);background-size:15px 15px;z-index:0}
-.founder-head{position:relative;z-index:1;display:flex;align-items:center;gap:16px;margin-bottom:24px}
-.founder-head svg{width:56px;height:56px;stroke:#101a2b;fill:none;stroke-width:1.4;flex:0 0 auto}
+.founder-head{position:relative;z-index:1;display:flex;align-items:center;margin-bottom:20px}
 .founder-head h2{font-family:"Montserrat",sans-serif;font-size:clamp(2.1rem,4.4vw,3.2rem);color:#1c6cab;font-weight:800;line-height:1.02}
-.tag-note{display:inline-block;background:#FFF6DC;color:#8a6d12;font-size:.74rem;font-weight:600;padding:5px 12px;border-radius:999px;margin-bottom:16px}
 .founder-txt p{color:#5b6470;font-size:1rem;line-height:1.78;margin-bottom:16px;text-align:justify;position:relative;z-index:1}
 .founder-txt p b{color:#19222f;font-weight:700}
 .founder-txt .join-btn{margin-top:8px;display:inline-block}
@@ -224,8 +221,9 @@ background:#eef4f9;
 .submit-btn:hover{transform:translateY(-3px);box-shadow:0 20px 40px -10px rgba(14,120,200,.72);filter:brightness(1.06)}
 .cform .ok{display:none;margin-top:14px;background:#E7F8EE;color:#1f7a45;padding:12px;border-radius:11px;font-size:.88rem;font-weight:600;text-align:center}
 .cinfo{display:flex;flex-direction:column;gap:18px}
-.cinfo .map{flex:1;min-height:230px;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#E4F2FA,#CFE8F7);position:relative;border:1px solid var(--line)}
-.cinfo .map::after{content:"\1F4CD  Sector 63, Noida \2014 map embed";position:absolute;inset:0;display:grid;place-items:center;color:#5B89A6;font-weight:600;font-size:.86rem}
+.cinfo .map{flex:1;min-height:230px;border-radius:18px;overflow:hidden;position:relative;border:1px solid var(--line)}
+.cinfo .map iframe{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cinfo .map .map-link{position:absolute;inset:0;display:block;z-index:1}
 .cline{display:flex;gap:14px;align-items:flex-start}
 .cline .ic{width:42px;height:42px;border-radius:11px;background:#E6F7FF;color:var(--brand-d);display:grid;place-items:center;flex:0 0 auto}
 .cline b{font-family:"Space Grotesk";font-size:.86rem;color:var(--ink);display:block}
@@ -361,11 +359,14 @@ footer .logo .mark .c-dot{background:#cfe9fa}
 footer .logo{margin-bottom:20px}
 footer .logo img{height:50px}
 
-/* Our Work: slow auto slider of leader cards (non-clickable) */
-.wk-slider{position:relative;z-index:1;overflow:hidden}
-.wk-track{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;padding:6px 2px 14px}
+/* Our Work: card slider, auto-advances every 3s, 2 manual nav buttons */
+.wk-slider{position:relative;z-index:1}
+.wk-track{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding:6px 2px 14px}
 .wk-track::-webkit-scrollbar{display:none}
-.wk-card{flex:0 0 250px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 18px 40px -20px rgba(20,50,80,.28);display:flex;flex-direction:column;cursor:default;transition:box-shadow .3s ease,transform .3s ease}
+.wk-nav{display:flex;justify-content:center;gap:14px;margin-top:8px}
+.wk-btn{width:46px;height:46px;border-radius:50%;border:1.5px solid #1c6cab;background:#fff;color:#1c6cab;font-size:1.3rem;line-height:1;display:grid;place-items:center;cursor:pointer;transition:background .25s ease,color .25s ease,transform .2s ease}
+.wk-btn:hover{background:#1c6cab;color:#fff;transform:translateY(-2px)}
+.wk-card{flex:0 0 250px;scroll-snap-align:start;background:#fff;border-radius:18px;padding:16px;box-shadow:0 18px 40px -20px rgba(20,50,80,.28);display:flex;flex-direction:column;cursor:default;transition:box-shadow .3s ease,transform .3s ease}
 .wk-card:hover{background:#fff;transform:translateY(-4px);box-shadow:0 26px 50px -20px rgba(20,50,80,.42)}
 .wk-photo{border-radius:14px;overflow:hidden;height:262px;background:#dceaf6}
 .wk-photo::after{content:none}

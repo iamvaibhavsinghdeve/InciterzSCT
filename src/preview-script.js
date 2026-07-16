@@ -16,20 +16,33 @@ mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.clas
 // reveal on scroll
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-// Our Work: very slow continuous auto-slider (non-clickable leader cards)
+// Our Work: card slider, auto-advances every 3s, plus 2 manual nav buttons
 const wkt=document.getElementById('wkTrack');
-if(wkt) autoScroll(wkt,0.14);
-function autoScroll(el,speed){
-  el.innerHTML+=el.innerHTML;
-  let paused=false,raf;
-  el.addEventListener('mouseenter',()=>paused=true);
-  el.addEventListener('mouseleave',()=>paused=false);
-  el.addEventListener('touchstart',()=>paused=true,{passive:true});
-  function tick(){
-    if(!paused){el.scrollLeft+=speed;if(el.scrollLeft>=el.scrollWidth/2)el.scrollLeft-=el.scrollWidth/2;}
-    raf=requestAnimationFrame(tick);
+if(wkt) initCardSlider(wkt,'wkPrev','wkNext',3000);
+function initCardSlider(track,prevId,nextId,interval){
+  const prevBtn=document.getElementById(prevId);
+  const nextBtn=document.getElementById(nextId);
+  function step(){
+    const card=track.querySelector('.wk-card');
+    if(!card) return 0;
+    const gap=parseFloat(getComputedStyle(track).columnGap)||0;
+    return card.getBoundingClientRect().width+gap;
   }
-  tick();
+  function atEnd(){return track.scrollLeft+track.clientWidth>=track.scrollWidth-2;}
+  function next(){
+    if(atEnd()) track.scrollTo({left:0,behavior:'smooth'});
+    else track.scrollBy({left:step(),behavior:'smooth'});
+  }
+  function prev(){
+    if(track.scrollLeft<=2) track.scrollTo({left:track.scrollWidth,behavior:'smooth'});
+    else track.scrollBy({left:-step(),behavior:'smooth'});
+  }
+  let timer=setInterval(next,interval);
+  function restart(){clearInterval(timer);timer=setInterval(next,interval);}
+  if(prevBtn) prevBtn.addEventListener('click',()=>{prev();restart();});
+  if(nextBtn) nextBtn.addEventListener('click',()=>{next();restart();});
+  track.addEventListener('mouseenter',()=>clearInterval(timer));
+  track.addEventListener('mouseleave',()=>{timer=setInterval(next,interval)});
 }
 // contact form -> open an email to connect@inciterz.com prefilled with the form data
 const sb=document.getElementById('submitBtn');
